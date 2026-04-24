@@ -1,8 +1,14 @@
 {
   "name": "api",
   "private": true,
+  "files": [
+    "index.ts"
+  ],
   "type": "module",
   "scripts": {
-    "dev": "echo api"
+    "dev": "bun --hot ."
+  },
+  "devDependencies": {
+    "@types/bun": "1.3.13"
   }
 }

@@ -4,6 +4,9 @@
     "lib": [
       "ESNext"
     ],
+    "types": [
+      "bun"
+    ],
     "target": "ESNext",
     "module": "Preserve",
     "moduleDetection": "force",
@@ -25,7 +28,7 @@
     "incremental": false
   },
   "include": [
-    "src"
+    "*"
   ],
   "exclude": [
     "node_modules",
