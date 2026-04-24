@@ -1,0 +1,11 @@
+{
+  "categories": {
+    "correctness": "error",
+    "suspicious": "warn"
+  },
+  "plugins": ["typescript", "react"],
+  "rules": {
+    "react/react-in-jsx-scope": "off"
+  },
+  "ignorePatterns": ["dist", "out", ".next", "node_modules"]
+}
