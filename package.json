@@ -8,6 +8,9 @@
   "scripts": {
     "dev": "bun -F '*' --parallel dev",
     "build": "bun -F '*' --parallel build",
+    "db:up": "docker compose up -d",
+    "db:down": "docker compose down",
+    "migrate": "bun -F server migrate",
     "docker:local": "docker build --build-arg ENV_FILE=.env.production.local -t bunext .",
     "docker:deploy": "docker build --build-arg ENV_FILE=.env.deploy -t bunext .",
     "format": "oxfmt .",

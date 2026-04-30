@@ -4,3 +4,5 @@ out
 dist
 .git
 .DS_Store
+.db
+server/bin

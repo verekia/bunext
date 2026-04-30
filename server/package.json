@@ -1,19 +1,19 @@
 {
   "name": "server",
   "private": true,
-  "files": [
-    "index.ts"
-  ],
   "type": "module",
   "scripts": {
     "dev": "bun --hot .",
-    "build": "bun build ./index.ts --production --compile --minify --bytecode --outfile bin"
+    "build": "bun build ./index.ts --production --compile --minify --bytecode --outfile bin",
+    "migrate": "bun migrate.ts"
   },
   "dependencies": {
+    "jsonwebtoken": "9.0.2",
     "serve-handler": "6.1.7"
   },
   "devDependencies": {
     "@types/bun": "1.3.13",
+    "@types/jsonwebtoken": "9.0.7",
     "@types/serve-handler": "6.1.4"
   }
 }

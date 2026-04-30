@@ -5,3 +5,5 @@ dist
 .DS_Store
 next-env.d.ts
 *.tsbuildinfo
+.db
+server/bin
