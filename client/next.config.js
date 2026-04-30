@@ -5,6 +5,8 @@
  */
 const nextConfig = {
   output: 'export',
+  reactStrictMode: true,
+  reactCompiler: true,
 }
 
 export default nextConfig

@@ -2,10 +2,10 @@
   "files": [],
   "references": [
     {
-      "path": "api"
+      "path": "server"
     },
     {
-      "path": "frontend"
+      "path": "client"
     }
   ]
 }

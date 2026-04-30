@@ -1,14 +1,15 @@
 {
   "private": true,
   "workspaces": [
-    "frontend",
-    "api"
+    "client",
+    "server"
   ],
   "type": "module",
   "scripts": {
     "dev": "bun -F '*' --parallel dev",
     "build": "bun -F '*' --parallel build",
-    "start": "bun -F '*' --parallel start",
+    "docker:local": "docker build --build-arg ENV_FILE=.env.production.local -t bunext .",
+    "docker:deploy": "docker build --build-arg ENV_FILE=.env.deploy -t bunext .",
     "format": "oxfmt .",
     "format:check": "oxfmt --check .",
     "lint": "oxlint .",
