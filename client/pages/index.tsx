@@ -1,26 +1,25 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { type resolveHello, type resolveMe } from 'server/resolvers'
 
-type HelloResponse = Awaited<ReturnType<typeof resolveHello>>
-type MeResponse = Awaited<ReturnType<typeof resolveMe>>
+import { api } from '../api'
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL
 
 const IndexPage = () => {
   const queryClient = useQueryClient()
 
-  const { data: hello } = useQuery<HelloResponse>({
+  const { data: hello } = useQuery({
     queryKey: ['hello'],
-    queryFn: () => fetch(`${apiUrl}/hello`).then((res) => res.json()),
+    queryFn: () => api<typeof resolveHello>('/hello'),
   })
 
-  const { data: me, isLoading: meLoading } = useQuery<MeResponse>({
+  const { data: me, isLoading: meLoading } = useQuery({
     queryKey: ['me'],
-    queryFn: () => fetch(`${apiUrl}/me`, { credentials: 'include' }).then((res) => res.json()),
+    queryFn: () => api<typeof resolveMe>('/me'),
   })
 
   const logout = useMutation({
-    mutationFn: () => fetch(`${apiUrl}/logout`, { method: 'POST', credentials: 'include' }),
+    mutationFn: () => api('/logout', { method: 'POST' }),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['me'] }),
   })
 
