@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "next dev",
+    "dev": "portless bunext next dev",
     "build": "next build"
   },
   "dependencies": {
@@ -16,6 +16,7 @@
     "@types/node": "25.6.0",
     "@types/react": "19.2.14",
     "babel-plugin-react-compiler": "1.0.0",
+    "portless": "0.13.0",
     "server": "workspace:*"
   }
 }
