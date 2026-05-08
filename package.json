@@ -14,11 +14,12 @@
     "format:check": "oxfmt --check .",
     "lint": "oxlint .",
     "lint:fix": "oxlint --fix .",
-    "all": "bun format:check && bun lint"
+    "typecheck": "tsc --noEmit",
+    "all": "bun run format:check && bun run lint && bun run typecheck"
   },
   "devDependencies": {
-    "oxfmt": "0.46.0",
-    "oxlint": "1.61.0",
+    "oxfmt": "0.48.0",
+    "oxlint": "1.63.0",
     "typescript": "6.0.3"
   }
 }
