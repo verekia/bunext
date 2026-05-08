@@ -6,9 +6,10 @@ This file provides guidance to Claude Code when working with code in this reposi
 
 - `bun dev` — runs `client` and `server` dev scripts in parallel via Bun workspace filter
 - `bun build` — parallel build (Next.js export for client, single-file compiled binary for server)
-- `bun all` — `format:check && lint` (the only quality gate; no test suite exists)
+- `bun all` — `format:check && lint && typecheck` (the only quality gate; no test suite exists)
 - `bun lint` / `bun lint:fix` — oxlint
 - `bun format` / `bun format:check` — oxfmt
+- `bun typecheck` — `tsc --noEmit` against the workspace solution config
 - `bun docker:local` — Docker image using `.env.production.local`
 - `bun docker:deploy` — Docker image using `.env.deploy`
 
