@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "next dev",
+    "dev": "portless bunext next dev",
     "build": "next build"
   },
   "dependencies": {
