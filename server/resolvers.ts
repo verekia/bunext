@@ -1,3 +1,3 @@
-const getHelloFromDb = async () => ({ hello: 'world ' })
+import { getHelloFromDb } from './db'
 
-export const resolveHello = async () => getHelloFromDb()
+export const resolveHello = () => getHelloFromDb()
