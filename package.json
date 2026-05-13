@@ -19,7 +19,7 @@
     "all": "bun run format:check && bun run lint && bun run typecheck && bun run warden"
   },
   "devDependencies": {
-    "@verekia/warden": "0.0.3",
+    "@verekia/warden": "0.0.4",
     "oxfmt": "0.48.0",
     "oxlint": "1.63.0",
     "typescript": "6.0.3"
