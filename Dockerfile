@@ -1,4 +1,4 @@
-FROM oven/bun:1.3.13-alpine AS builder
+FROM oven/bun:1.4.4-alpine AS builder
 
 ARG ENV_FILE=.env.production.local
 

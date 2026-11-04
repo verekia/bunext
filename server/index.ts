@@ -1,3 +1,4 @@
+import { existsSync, readdirSync } from 'node:fs'
 import { createServer } from 'node:http'
 import handler from 'serve-handler'
 
@@ -8,10 +9,24 @@ if (!PORT) throw new Error('PORT not defined')
 const isProd = process.env.NODE_ENV === 'production'
 
 const STATIC_PORT = 57471
+const STATIC_DIR = './client'
+
+// Next exports a dynamic page as a file named after its route, like date/[date].html
+const dynamicPages = (
+  existsSync(STATIC_DIR) ? readdirSync(STATIC_DIR, { recursive: true, encoding: 'utf8' }) : []
+)
+  .filter((file) => file.endsWith('.html') && file.includes('['))
+  .map((file) => {
+    const route = `/${file.replace(/\.html$/, '')}`
+    const pattern = route.replace(/\[\.\.\.[^\]]+\]/g, '.+').replace(/\[[^\]]+\]/g, '[^/]+')
+    return { route, regex: new RegExp(`^${pattern}$`) }
+  })
+  // A more specific route wins, like /users/[id] over /[...path]
+  .sort((a, b) => a.route.split('[').length - b.route.split('[').length)
 
 createServer((req, res) =>
   handler(req, res, {
-    public: './client',
+    public: STATIC_DIR,
     cleanUrls: true,
     trailingSlash: false,
     etag: true,
@@ -25,12 +40,19 @@ Bun.serve({
   },
   async fetch(req) {
     const url = new URL(req.url)
-    return fetch(`http://127.0.0.1:${STATIC_PORT}${url.pathname}${url.search}`, {
-      method: req.method,
-      headers: req.headers,
-      body: req.body,
-      redirect: 'manual',
-    })
+    const serve = (pathname: string) =>
+      fetch(`http://127.0.0.1:${STATIC_PORT}${pathname}${url.search}`, {
+        method: req.method,
+        headers: req.headers,
+        body: req.body,
+        redirect: 'manual',
+      })
+
+    const res = await serve(url.pathname)
+    if (res.status !== 404) return res
+
+    const page = dynamicPages.find(({ regex }) => regex.test(url.pathname))
+    return page ? serve(page.route) : res
   },
 })
 
