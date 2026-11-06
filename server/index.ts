@@ -39,12 +39,14 @@ Bun.serve({
     '/hello': async () => Response.json(await resolveHello()),
   },
   async fetch(req) {
+    // Only pages are left here, and they never read a body
+    if (req.method !== 'GET' && req.method !== 'HEAD') return Response.json({ message: 'Not found' }, { status: 404 })
+
     const url = new URL(req.url)
     const serve = (pathname: string) =>
       fetch(`http://127.0.0.1:${STATIC_PORT}${pathname}${url.search}`, {
         method: req.method,
         headers: req.headers,
-        body: req.body,
         redirect: 'manual',
       })
 
@@ -53,6 +55,10 @@ Bun.serve({
 
     const page = dynamicPages.find(({ regex }) => regex.test(url.pathname))
     return page ? serve(page.route) : res
+  },
+  error(error) {
+    console.error(error)
+    return Response.json({ message: 'Internal Server Error' }, { status: 500 })
   },
 })
 
