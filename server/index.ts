@@ -40,7 +40,8 @@ Bun.serve({
   },
   async fetch(req) {
     // Only pages are left here, and they never read a body
-    if (req.method !== 'GET' && req.method !== 'HEAD') return Response.json({ message: 'Not found' }, { status: 404 })
+    if (req.method !== 'GET' && req.method !== 'HEAD')
+      return Response.json({ message: 'Not found' }, { status: 404 })
 
     const url = new URL(req.url)
     const serve = (pathname: string) =>

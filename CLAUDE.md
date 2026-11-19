@@ -8,8 +8,8 @@ This file provides guidance to Claude Code when working with code in this reposi
 - `bun build` — parallel build (Next.js export for client, single-file compiled binary for server)
 - `bun all` — `format:check && lint && typecheck` (the only quality gate; no test suite exists)
 - `bun lint` / `bun lint:fix` — oxlint
-- `bun format` / `bun format:check` — oxfmt
-- `bun typecheck` — `tsc --noEmit` against the workspace solution config
+- `bun format` / `bun format:check` — `bun fmt`
+- `bun typecheck` — `bun check`, which follows the workspace project references
 - `bun docker:local` — Docker image using `.env.production.local`
 - `bun docker:deploy` — Docker image using `.env.deploy`
 
@@ -18,7 +18,7 @@ Per-package commands (run from `client/` or `server/`):
 - `client`: `next dev`, `next build`
 - `server`: `bun --hot .` (dev), `bun build ./index.ts --production --compile --minify --bytecode --outfile bin` (build)
 
-Tooling: oxlint + oxfmt (no ESLint/Prettier). Style is enforced: no semicolons, single quotes, trailing commas, 100-col width, always-parens arrow fns.
+Tooling: oxlint + `bun fmt` (no ESLint/Prettier). Style is enforced: no semicolons, single quotes, trailing commas, 100-col width, always-parens arrow fns.
 
 ## Architecture
 
